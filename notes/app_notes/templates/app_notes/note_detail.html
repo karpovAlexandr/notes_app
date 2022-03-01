@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Note' %} № {{ note.id }}
+{% endblock %}
+
+{% block content %}
+<div class="card mb-3">
+    <div class="card-header">
+        <h3 class="mb-0">{{ note.title }}</h3>
+    </div>
+    <div class="card-body">
+        <div class="media">
+            <div class="media-body">
+                <p class="card-text mb-auto">
+                    {{ note.content|safe|linebreaks|truncatewords:100 }}
+                </p>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer text-muted">
+        <p class="card-text mb-auto">
+            {% trans 'Created at' %}: {{ note.created_at }}
+        </p>
+
+        <p class="card-text mb-auto">
+            {% trans 'Created at' %}: {{ note.updated_at }}
+        </p>
+        <a href="{% url 'note:note_update' note.pk %}">{% trans 'Edit' %}</a>
+    </div>
+</div>
+{% endblock %}
+

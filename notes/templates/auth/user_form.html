@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "Edit" %}
+{% endblock %}
+
+{% block content %}
+    <h1>
+        {% trans "Edit" %}
+    </h1>
+
+    <form class="col-md-4 mb-3" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">
+            {% trans "Save" %}
+        </button>
+    </form>
+{% endblock %}

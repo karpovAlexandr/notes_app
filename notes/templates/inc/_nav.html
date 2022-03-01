@@ -1,0 +1,53 @@
+{% load i18n %}
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'index' %}">{% trans "Main page" %}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02"
+            aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="nav navbar-nav ml-auto">
+            <li>
+                <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                    <select name="language">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"
+                                    {% if language.code == LANGUAGE_CODE %}
+                                        selected
+                                    {% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Go">
+                </form>
+            </li>
+
+            {% if request.user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'note:note_list' %}">{% trans 'Notes list' %}</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'note:note_create' %}">{% trans 'Add note' %}</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'users:logout' %}">{% trans 'Log out' %}</a>
+                </li>
+            {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'users:login' %}">{% trans 'Log in' %}</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'users:registration' %}">{% trans 'Sign up' %}</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Note list' %}
+{% endblock %}
+
+{% block content %}
+     <div class="container my-xl-3">
+         <div class="card-header">
+            <h1>
+                {% trans "Notes" %}:
+            </h1>
+        </div>
+        <div class="row mb-2">
+            {% for note in note_list %}
+                <div class="col-md-6">
+                    <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            <a href="{% url 'note:note_detail' note.pk %}">
+                                <h3 class="mb-0">{{ note.title }}</h3>
+
+                                <p class="card-text mb-auto">
+                                    {{ note.content|safe|linebreaks|truncatewords:100 }}
+                                </p>
+
+                                <p class="card-text mb-auto">
+                                    {% trans 'Created at' %}: {{ note.created_at }}
+                                </p>
+
+                                <p class="card-text mb-auto">
+                                    {% trans 'authors email' %}: {{ note.user.email }}
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
