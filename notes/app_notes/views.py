@@ -1,9 +1,22 @@
+import logging
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from django.views import generic, View
+from django.utils.translation import gettext_lazy as _
 
 from app_notes.forms import NoteForm
 from app_notes.models import Note
+
+logger = logging.getLogger(__name__)
+
+
+def handler403(request, exception):
+    logger.error(exception)
+    return HttpResponseRedirect('/notes')
 
 
 class IndexView(View):
@@ -43,7 +56,21 @@ class NoteDetailView(
 ):
     context_object_name = 'note'
     model = Note
-    queryset = Note.objects.filter(is_published=True).select_related("user").only("title", "content", "created_at", "updated_at", "user")
+    queryset = (
+        Note.objects.filter(is_published=True)
+            .select_related("user")
+            .only(
+            "title", "content", "created_at", "updated_at", "user"
+        )
+    )
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        current_user = self.request.user
+        if self.object.user != current_user and not current_user.is_superuser:
+            raise PermissionDenied(_('You can read only your Note!'))
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
 
 
 class NoteUpdateView(
@@ -52,3 +79,29 @@ class NoteUpdateView(
 ):
     form_class = NoteForm
     queryset = Note.objects.filter(is_published=True)
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        current_user = self.request.user
+        if self.object.user != current_user and not current_user.is_superuser:
+            raise PermissionDenied(_('You can update only your Note!'))
+        return super().get(request, *args, **kwargs)
+
+
+class NoteDeleteView(
+    LoginRequiredMixin,
+    generic.DeleteView
+):
+    model = Note
+
+    def get_success_url(self):
+        return reverse('note:note_list')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        current_user = self.request.user
+        if self.object.user != current_user and not current_user.is_superuser:
+            raise PermissionDenied(_('You can delete only your Note!'))
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)

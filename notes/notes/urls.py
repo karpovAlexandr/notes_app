@@ -26,6 +26,7 @@ urlpatterns = [
     path('notes/', include('app_notes.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
+handler403 = 'app_notes.views.handler403'
 
-if settings.DEBUG:
+if bool(settings.DEBUG):
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

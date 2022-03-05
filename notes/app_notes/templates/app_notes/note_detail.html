@@ -29,6 +29,7 @@
             {% trans 'Created at' %}: {{ note.updated_at }}
         </p>
         <a href="{% url 'note:note_update' note.pk %}">{% trans 'Edit' %}</a>
+         <a href="{% url 'note:note_delete' note.pk %}">{% trans 'Delete' %}</a>
     </div>
 </div>
 {% endblock %}

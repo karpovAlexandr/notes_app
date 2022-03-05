@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <h1>{% trans 'Delete note' %}: {{ note.title }} - id {{ note.pk }}?</h1>
+        <p>
+            <input class="btn btn-primary" type="submit" value="Да">
+            <a class="btn btn-primary" href="{% url 'note:note_detail' note.pk %}" >Нет</a>
+        </p>
+    </form>
+{% endblock %}
