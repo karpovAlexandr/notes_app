@@ -1,0 +1,168 @@
+{
+	"id": "32c8cd63-bd18-ba1e-015d-5b10f1a7fe96",
+	"name": "notes",
+	"description": "",
+	"order": [
+		"2f4146c2-0466-f373-4a3b-e36a8842c7f4",
+		"538e0d15-bb55-ef1e-e35f-8dc642093a6f",
+		"45d9f763-8208-61ba-fbcb-8b22ba5a2cd9",
+		"7b7d1a73-462f-7cd0-0b36-55fcad78b494",
+		"46bb0d58-44a9-95d4-c2bc-0c5906c6eabb"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1646675698905,
+	"owner": "4704141",
+	"public": false,
+	"requests": [
+		{
+			"id": "2f4146c2-0466-f373-4a3b-e36a8842c7f4",
+			"headers": "",
+			"headerData": [],
+			"url": "",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "GET",
+			"collectionId": "32c8cd63-bd18-ba1e-015d-5b10f1a7fe96",
+			"data": null,
+			"dataMode": "params",
+			"name": "note_list",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1646675724626,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "45d9f763-8208-61ba-fbcb-8b22ba5a2cd9",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YWxleEBtYWlsLnJ1OmdIcmViZmplaDJrdms=\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Basic YWxleEBtYWlsLnJ1OmdIcmViZmplaDJrdms=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:8000/api/notes/{id}/update/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1646677721566,
+			"name": "note_update",
+			"description": "",
+			"collectionId": "32c8cd63-bd18-ba1e-015d-5b10f1a7fe96",
+			"responses": [],
+			"rawModeData": "{\n    \"title\": \"title\",\n    \"content\": \"content\",\n    \"is_published\": true\n}"
+		},
+		{
+			"id": "46bb0d58-44a9-95d4-c2bc-0c5906c6eabb",
+			"headers": "Authorization: Basic YWxleEBtYWlsLnJ1OmdIcmViZmplaDJrdms=\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Basic YWxleEBtYWlsLnJ1OmdIcmViZmplaDJrdms=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:8000/api/notes/{id}/delete/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1646677718012,
+			"name": "note_delete",
+			"description": "",
+			"collectionId": "32c8cd63-bd18-ba1e-015d-5b10f1a7fe96",
+			"responses": []
+		},
+		{
+			"id": "538e0d15-bb55-ef1e-e35f-8dc642093a6f",
+			"headers": "Authorization: Basic YWxleEBtYWlsLnJ1OmdIcmViZmplaDJrdms=\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Basic YWxleEBtYWlsLnJ1OmdIcmViZmplaDJrdms=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:8000/api/notes/{id}",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1646677723626,
+			"name": "note_detail",
+			"description": "",
+			"collectionId": "32c8cd63-bd18-ba1e-015d-5b10f1a7fe96",
+			"responses": []
+		},
+		{
+			"id": "7b7d1a73-462f-7cd0-0b36-55fcad78b494",
+			"headers": "Content-Type: application/json\nAuthorization: Basic YWxleEBtYWlsLnJ1OmdIcmViZmplaDJrdms=\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Basic YWxleEBtYWlsLnJ1OmdIcmViZmplaDJrdms=",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://127.0.0.1:8000/api/notes/add/",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1646677713829,
+			"name": "note_create",
+			"description": "",
+			"collectionId": "32c8cd63-bd18-ba1e-015d-5b10f1a7fe96",
+			"responses": [],
+			"rawModeData": "{\n    \"title\": \"title\",\n    \"content\": \"content\",\n    \"is_published\": true\n}"
+		}
+	]
+}

@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('app_users.urls')),
     path('notes/', include('app_notes.urls')),
+    path('api/', include('app_notes_api.urls')),
+    path('api-auth/', include('rest_framework.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 handler403 = 'app_notes.views.handler403'
