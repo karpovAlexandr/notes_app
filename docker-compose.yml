@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+
+  web:
+    build: ./notes
+    command: sh -c "gunicorn notes.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - ./notes:/usr/src/app
+      - static_data:/usr/src/app/static
+    expose:
+      - 8000
+    env_file:
+      - ./.env.app.dev
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - 5432
+    env_file:
+      - ./.env.db.dev
+
+  nginx:
+    image: nginx:1.19.8-alpine
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+    volumes:
+      - static_data:/var/www/html/static
+      - ./nginx:/etc/nginx/conf.d
+
+volumes:
+  postgres_data:
+  static_data:
